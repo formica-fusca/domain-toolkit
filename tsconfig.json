@@ -1,0 +1,8 @@
+{
+  "//": "Solution-style root: builds nothing itself, it only names the graph so `tsc -b` can order it.",
+  "files": [],
+  "references": [
+    { "path": "./packages/state" },
+    { "path": "./packages/domain-tools" }
+  ]
+}

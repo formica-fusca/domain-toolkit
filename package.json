@@ -1,0 +1,38 @@
+{
+  "name": "domain-tools-workspace",
+  "version": "0.1.0",
+  "description": "Workspace root for domain-tools — publishes nothing itself",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "packages/*",
+    "typedoc"
+  ],
+  "scripts": {
+    "typecheck": "tsc -b",
+    "build": "yarn typecheck && yarn workspace domain-tools build",
+    "test": "yarn typecheck && yarn workspace @domain-tools/state test && yarn workspace domain-tools test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "docs": "yarn workspace domain-tools-typedoc docs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "author": "audreyigouassel@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.2.0",
+    "eslint": "10.8.1",
+    "prettier": "3.9.6",
+    "ts-node": "10.9.2",
+    "tsup": "8.5.1",
+    "typedoc": "0.28.20",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.67.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formica-fusca/domain-tools.git"
+  }
+}

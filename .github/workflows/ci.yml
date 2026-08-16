@@ -1,0 +1,74 @@
+# Lint, typecheck, build and test every workspace.
+#
+# Split into parallel jobs rather than one script, so a red run names which
+# gate failed without anyone opening the log. They each pay a fresh install;
+# that is the trade, and at this size it is cheap.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A branch only needs its newest commit checked. `main` is excluded from the
+# cancellation so pushed history keeps a complete record.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      # Rules are type-checked, so the project graph has to be built before
+      # they can be evaluated at all.
+      - run: yarn typecheck
+      - run: yarn lint
+      - run: yarn format:check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      # `yarn test` runs `tsc -b` first: several assertions in these suites are
+      # `@ts-expect-error` directives, which only fail the build at compile time.
+      - run: yarn test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+      # The published artifact must not reference `@domain-tools/state`: that
+      # package is private, so a surviving specifier resolves in this repo and
+      # in no consumer's node_modules. tsup inlines it into both the JS and the
+      # .d.ts — this asserts the inlining actually happened, because the failure
+      # is otherwise invisible until someone installs the package.
+      - name: the private dependency must not survive into dist
+        run: |
+          if grep -rn "@domain-tools/state" packages/domain-tools/dist; then
+            echo "::error::@domain-tools/state leaked into the published bundle"
+            exit 1
+          fi
+          echo "dist is self-contained"

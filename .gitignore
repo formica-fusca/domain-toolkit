@@ -1,0 +1,6 @@
+node_modules
+.claude
+dist
+.test-build
+typedoc/site
+*.tsbuildinfo

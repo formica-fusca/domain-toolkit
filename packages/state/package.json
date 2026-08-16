@@ -1,0 +1,31 @@
+{
+  "name": "@domain-tools/state",
+  "version": "0.1.0",
+  "description": "The attribute bag behind domain-tools entities — internal, bundled into its consumer at build time",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "test": "tsc -p tsconfig.test.json && node --test \".test-build/test/**/*.test.js\"",
+    "lint": "eslint .",
+    "quiz": "yarn build && node exercises/detach-quiz.mjs"
+  },
+  "author": "audreyigouassel@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formica-fusca/domain-tools.git",
+    "directory": "packages/state"
+  }
+}

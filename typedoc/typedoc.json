@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "domain-tools",
+  "headings": {
+    "readme": false
+  },
+  "entryPoints": ["../packages/domain-tools/src/index.ts"],
+  "tsconfig": "../packages/domain-tools/tsconfig.json",
+  "readme": "../README.md",
+  "out": "site",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "treatWarningsAsErrors": true,
+  "sort": ["source-order"],
+  "navigationLinks": {
+    "GitHub": "https://github.com/formica-fusca/domain-tools"
+  }
+}
