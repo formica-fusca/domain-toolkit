@@ -2,8 +2,8 @@
 
 **Status:** fixed — guard in place, but see §7 for the change that would make it unnecessary.
 **Date:** 2026-08-15
-**Scope:** `packages/domain-tools/src/lib/entity.ts` (`Entity.create`, `abstractBase`, `assertConcrete`),
-`packages/domain-tools/src/lib/aggregate-root.ts` (`AggregateRoot.fromEvents`, `abstractBase`).
+**Scope:** `packages/domain-toolkit/src/lib/entity.ts` (`Entity.create`, `abstractBase`, `assertConcrete`),
+`packages/domain-toolkit/src/lib/aggregate-root.ts` (`AggregateRoot.fromEvents`, `abstractBase`).
 
 ---
 
@@ -67,7 +67,7 @@ straight past it. There is a test pinning this specifically.
 ## 2. `abstract` is erased
 
 `abstract` is a compile-time annotation with no runtime representation. From
-the emitted `packages/domain-tools/dist/lib/entity.js`:
+the emitted `packages/domain-toolkit/dist/lib/entity.js`:
 
 ```js
 export class Entity extends StateManager {
@@ -216,7 +216,7 @@ deliberately.
 imports from `entity.ts`; a separate module imported by both would be cleaner in
 the abstract, but an import in the other direction would close a cycle. It is
 exported for `aggregate-root.ts` to use and is **not** re-exported from
-`packages/domain-tools/src/index.ts` — it is internal.
+`packages/domain-toolkit/src/index.ts` — it is internal.
 
 A side effect worth having: a model author with an abstract intermediate of their
 own can declare `abstractBase` on it and get the same protection. Tested.
@@ -324,8 +324,8 @@ Base.viaPrototype(1); // ok  ← the defect
 The runtime behaviour, against the current tree:
 
 ```bash
-yarn test   # includes packages/domain-tools/test/construction.test.ts
-grep -n "class Entity" packages/domain-tools/dist/lib/entity.js   # no `abstract` survives the emit
+yarn test   # includes packages/domain-toolkit/test/construction.test.ts
+grep -n "class Entity" packages/domain-toolkit/dist/lib/entity.js   # no `abstract` survives the emit
 ```
 
 ## Related
@@ -334,9 +334,9 @@ grep -n "class Entity" packages/domain-tools/dist/lib/entity.js   # no `abstract
   and `prototype`-constraint machinery, a different failure: there the technique
   cannot be transplanted at all, because a static factory does not survive being
   inherited by classes with a different constructor arity.
-- `packages/domain-tools/src/lib/entity.ts` — `Entity.create`, the `abstractBase` marker, and
+- `packages/domain-toolkit/src/lib/entity.ts` — `Entity.create`, the `abstractBase` marker, and
   `assertConcrete`.
-- `packages/domain-tools/test/construction.test.ts` — the guard's tests, including the
+- `packages/domain-toolkit/test/construction.test.ts` — the guard's tests, including the
   `AggregateRoot.create` door and the marker's own-property semantics.
 - `atlas/lib/2026-08-14_protected-constructors-on-abstract-classes-in-typescript.md`
   — the argument that the protected constructors are not earning their place,

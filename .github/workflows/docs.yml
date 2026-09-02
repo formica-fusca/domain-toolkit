@@ -40,7 +40,7 @@ jobs:
       - run: yarn docs
 
       # No configure-pages step: TypeDoc emits relative links only, so there is
-      # no base path to inject for project-repo hosting under /domain-tools/.
+      # no base path to inject for project-repo hosting under /domain-toolkit/.
       - if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v5
         with:

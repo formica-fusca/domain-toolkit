@@ -60,7 +60,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
 
-      # The published artifact must not reference `@domain-tools/state`: that
+      # The published artifact must not reference `@domain-toolkit/state`: that
       # package is private, so a surviving specifier resolves in this repo and
       # in no consumer's node_modules. tsup inlines it into both the JS and the
       # .d.ts — this asserts the inlining actually happened, because the failure
@@ -71,8 +71,8 @@ jobs:
       # those survive into the .d.ts on purpose.
       - name: the private dependency must not survive into dist
         run: |
-          if grep -rnE "['\"]@domain-tools/state['\"]" packages/domain-tools/dist; then
-            echo "::error::@domain-tools/state leaked into the published bundle"
+          if grep -rnE "['\"]@domain-toolkit/state['\"]" packages/domain-toolkit/dist; then
+            echo "::error::@domain-toolkit/state leaked into the published bundle"
             exit 1
           fi
           echo "dist is self-contained"

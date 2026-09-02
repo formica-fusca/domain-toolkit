@@ -1,12 +1,12 @@
-# @domain-tools/state
+# @domain-toolkit/state
 
-The attribute bag a `domain-tools` entity **holds**, and the two types that make
+The attribute bag a `domain-toolkit` entity **holds**, and the two types that make
 creating one strict.
 
-This package is `private: true`. It is never published: `domain-tools` inlines it
+This package is `private: true`. It is never published: `domain-toolkit` inlines it
 — JavaScript and declarations both — into its own `dist` at build time, which is
 what lets that package keep advertising itself as dependency-free. See
-`packages/domain-tools/tsup.config.ts` for how, and why it takes two settings.
+`packages/domain-toolkit/tsup.config.ts` for how, and why it takes two settings.
 
 `src/index.ts` is deliberately bare. Everything below used to live there as doc
 comments; it is the reasoning behind the code, not a description of it, and this
@@ -176,7 +176,7 @@ gap at the cost of breaking every entity in the bag. Deliberate, and tested.
 It propagates outward, too. `Entity.mutate` rolls back through `snapshotState` /
 `restoreState`, both of which go through `detach`, so the atomicity guarantee
 inherits exactly this boundary — see
-`packages/domain-tools/test/atomicity.test.ts:274`.
+`packages/domain-toolkit/test/atomicity.test.ts:274`.
 
 `detachAll` is simply `detach` applied to every property of a state bag.
 
@@ -275,7 +275,7 @@ the object's own behaviour.
 The third — that creation is strict — cannot be tested here. It is enforced by
 `Entity.create` and `AggregateRoot.fromEvents`, which live one package _up_ the
 dependency arrow, so its tests are in
-`packages/domain-tools/test/state.test.ts` alongside the two reachability
+`packages/domain-toolkit/test/state.test.ts` alongside the two reachability
 assertions, which need a real `Entity` for the same reason.
 
 ## Related reading

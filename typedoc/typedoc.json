@@ -1,11 +1,11 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "name": "domain-tools-ts",
+  "name": "domain-toolkit",
   "headings": {
     "readme": false
   },
-  "entryPoints": ["../packages/domain-tools/src/index.ts"],
-  "tsconfig": "../packages/domain-tools/tsconfig.json",
+  "entryPoints": ["../packages/domain-toolkit/src/index.ts"],
+  "tsconfig": "../packages/domain-toolkit/tsconfig.json",
   "readme": "../README.md",
   "out": "site",
   "excludePrivate": true,
@@ -13,6 +13,6 @@
   "treatWarningsAsErrors": true,
   "sort": ["source-order"],
   "navigationLinks": {
-    "GitHub": "https://github.com/formica-fusca/domain-tools"
+    "GitHub": "https://github.com/formica-fusca/domain-toolkit"
   }
 }

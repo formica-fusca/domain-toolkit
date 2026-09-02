@@ -1,10 +1,10 @@
-# domain-tools-ts
+# domain-toolkit
 
 The published package: TypeScript building blocks for domain-driven design.
 
 For installation and the one compiler option `@Handle` needs, see the
 [repo-root README](../../README.md). For every exported signature, see the
-**[API reference](https://formica-fusca.github.io/domain-tools/)**, regenerated
+**[API reference](https://formica-fusca.github.io/domain-toolkit/)**, regenerated
 from these sources on each push to `main`.
 
 ## The building blocks
@@ -19,7 +19,7 @@ from these sources on each push to `main`.
 | `@Handle` / `HandleRegistry`             | Binds an event to the aggregate method that reacts to it, keyed by `eventName`.                                 |
 | `Repository`                             | A collection-like interface over **whole aggregates** — one per root, never per entity.                         |
 | `DomainError` and friends                | Errors the business refuses, as distinct from bugs.                                                             |
-| `State`, `RequiredKeys`, `RequiredState` | Re-exported from [`@domain-tools/state`](../state/README.md), which is bundled into this package's `dist`.      |
+| `State`, `RequiredKeys`, `RequiredState` | Re-exported from [`@domain-toolkit/state`](../state/README.md), which is bundled into this package's `dist`.    |
 
 ## Design notes
 
@@ -58,6 +58,6 @@ It also holds two reference notes on how the building blocks divide up:
 `test/` mirrors the concerns rather than the files: `construction.test.ts`,
 `identity.test.ts`, `events.test.ts`, `boundary.test.ts`, `atomicity.test.ts`,
 and `state.test.ts` — which holds the `Entity`/`StateManager` seam, the part of
-the state contract that cannot be tested inside `@domain-tools/state` itself.
+the state contract that cannot be tested inside `@domain-toolkit/state` itself.
 
 Models the suites are written against live in `test/models/`.

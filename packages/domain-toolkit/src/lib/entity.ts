@@ -1,8 +1,8 @@
 import type { DomainEvent } from "./event-sourcing/domain-event.js";
 import type { Identifier } from "./identifier.js";
 import type { Newable } from "./types/newable.js";
-import { State, StateManager } from "@domain-tools/state";
-import type { RequiredState } from "@domain-tools/state";
+import { State, StateManager } from "@domain-toolkit/state";
+import type { RequiredState } from "@domain-toolkit/state";
 
 // The reasoning behind this file — why an entity holds a StateManager rather
 // than extending one, what the `this` parameter and the `prototype` constraint
@@ -122,7 +122,7 @@ export abstract class Entity<
    *
    * Reading is not a write channel: the value handed back is detached from the
    * state, so mutating it reaches nothing. The copy is one level deep — see
-   * `@domain-tools/state` for that boundary and its one deliberate limit.
+   * `@domain-toolkit/state` for that boundary and its one deliberate limit.
    */
   get(): EntityState;
   get<K extends keyof EntityState>(key: K): EntityState[K];

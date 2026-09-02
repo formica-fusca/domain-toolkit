@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { StateManager } from "@domain-tools/state";
+import { StateManager } from "@domain-toolkit/state";
 
 import { Entity } from "../src/index.js";
 import { BookStock, TitleId } from "./models/book-stock.js";
@@ -9,13 +9,13 @@ import { BookStock, TitleId } from "./models/book-stock.js";
 /**
  * The seam between an `Entity` and the `StateManager` it **holds**.
  *
- * The bag itself lives in `@domain-tools/state` and is tested there — its
+ * The bag itself lives in `@domain-toolkit/state` and is tested there — its
  * `get`/`set`/`detach` promises need nothing from this package. What is left
  * here is everything that can only be asserted from *above* the dependency
  * arrow, and it is two groups:
  *
  * 1. **Creation is strict.** `RequiredKeys` / `RequiredState` are declared in
- *    `@domain-tools/state`, but the only paths that apply them are
+ *    `@domain-toolkit/state`, but the only paths that apply them are
  *    `Entity.create` and `AggregateRoot.fromEvents`, which are ours. The types
  *    used to sit on `StateManager.init`, which nothing called — see
  *    `docs/state-manager-init.md` §0 and §7.

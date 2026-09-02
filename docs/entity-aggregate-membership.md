@@ -3,10 +3,10 @@
 **Status:** reference — describes the design as it stands; contains one proposal
 (§4) that is **not** implemented.
 **Date:** 2026-08-17
-**Scope:** `packages/domain-tools/src/lib/entity.ts`,
-`packages/domain-tools/src/lib/aggregate-root.ts` (`childEntities`, the class
+**Scope:** `packages/domain-toolkit/src/lib/entity.ts`,
+`packages/domain-toolkit/src/lib/aggregate-root.ts` (`childEntities`, the class
 comment's sizing rule), and the models in
-`packages/domain-tools/test/models/` (`book-stock.ts`, `copy.ts`, `member.ts`).
+`packages/domain-toolkit/test/models/` (`book-stock.ts`, `copy.ts`, `member.ts`).
 
 ---
 
@@ -49,7 +49,7 @@ managing entity is itself.
 
 ## 2. The shapes, in the models
 
-`packages/domain-tools/test/models/` happens to demonstrate exactly the legal
+`packages/domain-toolkit/test/models/` happens to demonstrate exactly the legal
 shapes and nothing else:
 
 | Class                             | Shape                                                               |
@@ -72,7 +72,7 @@ through change_. A `Copy` gets rebound, relabelled, moved between shelves — an
 stays the same copy. That justification is entirely local; it has nothing to do
 with `BookStock`. If the thing were interchangeable with any equal-valued twin,
 it would be a `ValueObject` and the question would not arise. See
-[`identifier.md`](../packages/domain-tools/docs/identifier.md#identity-versus-attributes).
+[`identifier.md`](../packages/domain-toolkit/docs/identifier.md#identity-versus-attributes).
 
 **What makes it invalid unmanaged** is something else entirely: reachability. An
 entity outside every boundary is not _unjustified_, it is _broken_ — and in this
@@ -151,10 +151,10 @@ not have been.
   silently rather than loudly
 - [`operation-atomicity.md`](./operation-atomicity.md) — §6, the other
   consequence of a child owning its own buffer
-- [`../packages/domain-tools/docs/aggregate-root.md`](../packages/domain-tools/docs/aggregate-root.md)
+- [`../packages/domain-toolkit/docs/aggregate-root.md`](../packages/domain-toolkit/docs/aggregate-root.md)
   — the traversal that `childEntities()` feeds, and why it is a flag rather than
   a visited-set
-- [`../packages/domain-tools/docs/identifier.md`](../packages/domain-tools/docs/identifier.md)
+- [`../packages/domain-toolkit/docs/identifier.md`](../packages/domain-toolkit/docs/identifier.md)
   — identity versus attributes, which is the entity-or-value-object test in §3
 - Vaughn Vernon, _Effective Aggregate Design_ (2011) — the three-part essay
   behind §5 and §6

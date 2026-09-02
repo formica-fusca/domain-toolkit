@@ -4,9 +4,9 @@
 `Entity.create` and `AggregateRoot.fromEvents`. **§3 and §4 reached the wrong
 verdict; see §0.**
 **Date:** 2026-08-15
-**Scope:** `packages/state/src/index.ts`, `packages/domain-tools/src/lib/entity.ts`,
-`packages/domain-tools/src/lib/aggregate-root.ts`,
-`packages/state/test/state-manager.test.ts`, `packages/domain-tools/test/state.test.ts`.
+**Scope:** `packages/state/src/index.ts`, `packages/domain-toolkit/src/lib/entity.ts`,
+`packages/domain-toolkit/src/lib/aggregate-root.ts`,
+`packages/state/test/state-manager.test.ts`, `packages/domain-toolkit/test/state.test.ts`.
 
 ---
 
@@ -151,12 +151,12 @@ factory to return something other than that subclass.
 
 Two aggravating factors:
 
-- `StateManager` and `State` are **not exported** from `packages/domain-tools/src/index.ts`. A
+- `StateManager` and `State` are **not exported** from `packages/domain-toolkit/src/index.ts`. A
   consumer of the published package cannot name the type this method hands back,
   while being able to call it on all of their own classes.
 - This is the same defect `Entity.create` had before it was fixed. The cure — a
   `this` parameter that types the receiver as the class actually called — sits
-  in `packages/domain-tools/src/lib/entity.ts` in the same repository. §5 explains why it cannot
+  in `packages/domain-toolkit/src/lib/entity.ts` in the same repository. §5 explains why it cannot
   simply be copied across.
 
 ---
@@ -302,8 +302,8 @@ precisely why the existing factories are constrained on `prototype` instead, and
 
 ## 6. Why none of this was caught
 
-- **No call sites.** `init` is called from nowhere in `packages/domain-tools/src/`. Its only callers
-  are the four tests at `packages/domain-tools/test/state.test.ts:55-100`, five calls in total.
+- **No call sites.** `init` is called from nowhere in `packages/domain-toolkit/src/`. Its only callers
+  are the four tests at `packages/domain-toolkit/test/state.test.ts:55-100`, five calls in total.
 - **The tests exercise only the cases where the type is a no-op.** They cover
   case A (omit an optional), case B (omit a required), and case D (a required
   `| undefined` slot). All three pass identically with a plain `S`. Case C —
@@ -385,10 +385,10 @@ script as CommonJS, where the dynamic `import` below has no top-level `await`.
 
 ```bash
 # The runtime claims in §2 and §5
-yarn test   # compiles packages/domain-tools/src and packages/domain-tools/test to packages/domain-tools/.test-build/
+yarn test   # compiles packages/domain-toolkit/src and packages/domain-toolkit/test to packages/domain-toolkit/.test-build/
 
 node --input-type=module -e '
-  const m = await import("./packages/domain-tools/.test-build/test/models/book-stock.js");
+  const m = await import("./packages/domain-toolkit/.test-build/test/models/book-stock.js");
 
   const thing = m.BookStock.init({ title: "D", barcodes: [], copies: [] });
   console.log(thing.constructor.name, thing.id);
@@ -402,8 +402,8 @@ node --input-type=module -e '
 
 ## Related
 
-- `packages/domain-tools/src/lib/entity.ts` — `Entity.create`, the same defect already fixed, and the
+- `packages/domain-toolkit/src/lib/entity.ts` — `Entity.create`, the same defect already fixed, and the
   `this`-parameter / `prototype`-constraint technique discussed in §5.
-- `packages/domain-tools/src/lib/aggregate-root.ts` — `AggregateRoot.fromEvents`, the same technique,
+- `packages/domain-toolkit/src/lib/aggregate-root.ts` — `AggregateRoot.fromEvents`, the same technique,
   and the `abstractBase` runtime guard added for a related gap in what the
   `prototype` constraint can express.

@@ -1,7 +1,7 @@
 {
-  "name": "domain-tools-workspace",
+  "name": "domain-toolkit-workspace",
   "version": "0.1.0",
-  "description": "Workspace root for domain-tools — publishes nothing itself",
+  "description": "Workspace root for domain-toolkit — publishes nothing itself",
   "private": true,
   "packageManager": "yarn@1.22.22",
   "workspaces": [
@@ -10,11 +10,11 @@
   ],
   "scripts": {
     "typecheck": "tsc -b",
-    "build": "yarn typecheck && yarn workspace domain-tools-ts build",
-    "test": "yarn typecheck && yarn workspace @domain-tools/state test && yarn workspace domain-tools-ts test",
+    "build": "yarn typecheck && yarn workspace domain-toolkit build",
+    "test": "yarn typecheck && yarn workspace @domain-toolkit/state test && yarn workspace domain-toolkit test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "docs": "yarn workspace domain-tools-typedoc docs",
+    "docs": "yarn workspace domain-toolkit-typedoc docs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -33,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formica-fusca/domain-tools.git"
+    "url": "git+https://github.com/formica-fusca/domain-toolkit.git"
   }
 }

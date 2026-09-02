@@ -14,7 +14,7 @@
  * yarn quiz --reveal 4 7    # reveal only these
  * ```
  *
- * From the workspace root: `yarn workspace @domain-tools/state quiz`. The script
+ * From the workspace root: `yarn workspace @domain-toolkit/state quiz`. The script
  * rebuilds `dist` before running, deliberately: this file imports the built
  * output, while `yarn test` compiles to `.test-build` instead — so a green test
  * run is no evidence that `dist` is current. That gap has bitten once already.
@@ -39,7 +39,7 @@ class Marker {
 }
 
 /**
- * Stands in for a `ValueObject`, which `@domain-tools/state` cannot import —
+ * Stands in for a `ValueObject`, which `@domain-toolkit/state` cannot import —
  * the dependency arrow runs the other way. The freeze is the part that matters:
  * see docs/detach-and-aliasing.md §7.
  */

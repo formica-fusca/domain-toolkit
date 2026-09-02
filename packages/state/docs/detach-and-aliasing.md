@@ -1,11 +1,11 @@
 # What `detach` is for, and why primitives need nothing done to them
 
 **Status:** applied — `Date`, `Map` and `Set` moved to the copied side on
-2026-08-18; 18 state tests and 63 `domain-tools` tests passing.
+2026-08-18; 18 state tests and 63 `domain-toolkit` tests passing.
 **Date:** 2026-08-18
 **Scope:** `packages/state/src/index.ts`, `packages/state/README.md`,
 `packages/state/test/state-manager.test.ts`,
-`packages/domain-tools/test/atomicity.test.ts`.
+`packages/domain-toolkit/test/atomicity.test.ts`.
 
 ---
 
@@ -208,7 +208,7 @@ which is what `packages/state/test/state-manager.test.ts:182` pins down — as
 
 `restore` (`:78`) is the fourth crossing and the least visible one: it is not
 called by application code at all, only by `Entity.restoreState`
-(`packages/domain-tools/src/lib/entity.ts:280`), which `mutate` uses to roll an
+(`packages/domain-toolkit/src/lib/entity.ts:280`), which `mutate` uses to roll an
 operation back. It detaches for the same reason as the constructor — the snapshot
 being put back must not stay live in the hands of whoever held it.
 
@@ -295,7 +295,7 @@ So the rule the design lands on:
 That rule would be uncomfortable if pass-through meant the caller got raw mutable
 state. It does not, and for two different reasons:
 
-- **`ValueObject` is frozen.** `packages/domain-tools/src/lib/value-object.ts:22`
+- **`ValueObject` is frozen.** `packages/domain-toolkit/src/lib/value-object.ts:22`
   does `Object.freeze({ ...props })` at construction. Nobody can mutate one you
   are holding, so detaching it would be a no-op with extra steps.
 - **`Entity` protects its own state.** An entity holds its own `StateManager`, so
@@ -309,7 +309,7 @@ into the type instead of enforcing it at every boundary the type crosses. That i
 why `detach` needs to know nothing about it.
 
 **The edge that survives.** `pullDomainEvents` is public on `Entity`
-(`packages/domain-tools/src/lib/entity.ts:258`), so a caller handed a child can
+(`packages/domain-toolkit/src/lib/entity.ts:258`), so a caller handed a child can
 drain its buffer, after which the root publishes nothing and says nothing. That
 is an event-loss hole rather than a state-corruption one, and it is not `detach`'s
 to close.
@@ -363,7 +363,7 @@ They are mutable, they carry no identity anyone means — nobody says "_this_
 definition of a container, so they now get rebuilt.
 
 This was not hypothetical. `deletedAt: Date | null` is the README's own canonical
-example of a sparse state property (`packages/domain-tools/test/models/book-stock.ts:41`),
+example of a sparse state property (`packages/domain-toolkit/test/models/book-stock.ts:41`),
 and `state.get("deletedAt").setFullYear(1999)` wrote straight into the bag.
 
 ### Where the old reasoning left a fingerprint
@@ -396,15 +396,15 @@ lands in bucket 3 where an unknown class belongs. Tested at
 
 ## 9. What the workspace split does and does not constrain
 
-`@domain-tools/state` is private and inlined into `domain-tools` at build time,
-and the dependency arrow runs one way: `domain-tools` → `state`. So `detach`
+`@domain-toolkit/state` is private and inlined into `domain-toolkit` at build time,
+and the dependency arrow runs one way: `domain-toolkit` → `state`. So `detach`
 cannot ask `value instanceof Entity`, and the natural question is whether that
 constraint is what shaped bucket 3.
 
 Mostly, no.
 
 - **It did not cause §8.** `Date`, `Map` and `Set` are built-ins. Closing that gap
-  needed no knowledge of `domain-tools` at all, which is why it could be closed
+  needed no knowledge of `domain-toolkit` at all, which is why it could be closed
   inside `state` without touching the split. It was an unforced gap, not a
   constrained one.
 - **It does not cost anything for `Entity` or `ValueObject`.** Both terminate in
@@ -484,18 +484,18 @@ from, and it would hand every model author a contract to implement correctly on
 every class, forever, in exchange for a case that should not arise.
 
 Recording it because the reasoning cuts the other way if the surrounding facts
-change: if `domain-tools` ever needs to hold third-party mutable objects it does
+change: if `domain-toolkit` ever needs to hold third-party mutable objects it does
 not control, the protocol is the route in, and it is cheaper than everything else
 in this section.
 
 ### What the split actually costs, restated
 
 Less than it first appears. The protocol route needs nothing from
-`domain-tools`, so the dependency arrow does not block it at all. That leaves
+`domain-toolkit`, so the dependency arrow does not block it at all. That leaves
 exactly one casualty: the warning — _"you are storing a mutable non-domain class
 in state; did you mean to make it a `ValueObject`?"_ — which does need the domain
 vocabulary. If it is ever wanted, the way in is not an import but an inversion:
-`StateManager` accepts a policy, and `domain-tools` supplies the types.
+`StateManager` accepts a policy, and `domain-toolkit` supplies the types.
 
 ```ts
 new StateManager(initial, {
@@ -503,7 +503,7 @@ new StateManager(initial, {
 });
 ```
 
-`state` stays dependency-free; `domain-tools` owns the domain types. The cost is
+`state` stays dependency-free; `domain-toolkit` owns the domain types. The cost is
 a seam and a config object on a class whose present virtue is having neither.
 Not taken.
 
@@ -552,7 +552,7 @@ The shallowness propagates outward. Because `Entity.mutate` rolls back through
 `snapshotState` / `restoreState`, and both go through `detach`, the rollback
 guarantee inherits the same boundary — restore the containers, not the values
 nested inside them. That is a test in its own right at
-`packages/domain-tools/test/atomicity.test.ts:274`.
+`packages/domain-toolkit/test/atomicity.test.ts:274`.
 
 ## 11. Where the aliasing genuinely remains
 
@@ -587,4 +587,4 @@ freeze does the rest.
   `extends` edge.
 - `../../../docs/operation-atomicity.md` — `mutate`, and the rollback path that
   inherits the depth boundary from §10.
-- `../../domain-tools/docs/value-object.md` — the freeze that §7 leans on.
+- `../../domain-toolkit/docs/value-object.md` — the freeze that §7 leans on.

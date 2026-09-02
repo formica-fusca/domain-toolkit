@@ -3,9 +3,9 @@ import { defineConfig } from "tsup";
 /**
  * The publishable artifact.
  *
- * `tsc` is not used for this build, and the reason is `@domain-tools/state`:
+ * `tsc` is not used for this build, and the reason is `@domain-toolkit/state`:
  * it is `private: true` and never reaches a registry, so any `import ... from
- * "@domain-tools/state"` surviving into `dist` is a specifier that resolves
+ * "@domain-toolkit/state"` surviving into `dist` is a specifier that resolves
  * here and nowhere else. `tsc` cannot fix that — it emits one file per input
  * and never inlines a dependency — so the bundler owns this step.
  *
@@ -27,9 +27,9 @@ export default defineConfig({
     // The declaration half of `noExternal`, and it is a *separate* setting
     // because tsup runs two bundlers: esbuild for the JavaScript, which honours
     // `noExternal`, and rollup-plugin-dts for the types, which does not. Without
-    // this the emitted `.d.ts` keeps `from "@domain-tools/state"` — a specifier
+    // this the emitted `.d.ts` keeps `from "@domain-toolkit/state"` — a specifier
     // that resolves in this repo and in no consumer's node_modules.
-    resolve: ["@domain-tools/state"],
+    resolve: ["@domain-toolkit/state"],
     // tsup injects `baseUrl` into the compiler options it uses for the
     // declaration bundle. TypeScript 6 has demoted that option to a hard error
     // (TS5101) ahead of removing it in 7, and the injection is not ours to
@@ -39,5 +39,5 @@ export default defineConfig({
   },
   clean: true,
   sourcemap: false,
-  noExternal: ["@domain-tools/state"],
+  noExternal: ["@domain-toolkit/state"],
 });

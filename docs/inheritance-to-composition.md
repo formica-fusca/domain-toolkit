@@ -2,8 +2,8 @@
 
 **Status:** done — applied, 54 tests passing, no behaviour change intended or observed.
 **Date:** 2026-08-15
-**Scope:** `packages/state/src/index.ts`, `packages/domain-tools/src/lib/entity.ts`,
-`packages/state/test/state-manager.test.ts`, `packages/domain-tools/test/state.test.ts`.
+**Scope:** `packages/state/src/index.ts`, `packages/domain-toolkit/src/lib/entity.ts`,
+`packages/state/test/state-manager.test.ts`, `packages/domain-toolkit/test/state.test.ts`.
 
 ---
 
@@ -152,7 +152,7 @@ exactly what it saw before.
   refactor landed, so that the diff stayed structural and the suite stayed the
   control. Both were closed immediately afterwards; see §7.
 - **`init`, `RequiredKeys` and `RequiredState` were still in
-  `@domain-tools/state`** when this refactor landed. Settled since: `init` is
+  `@domain-toolkit/state`** when this refactor landed. Settled since: `init` is
   deleted, and the two types moved onto `Entity.create` and
   `AggregateRoot.fromEvents` to make creation strict. See
   `docs/state-manager-init.md` §7.
@@ -164,7 +164,7 @@ structural, and the suite is the control.
 
 ## 6. The test that moved
 
-One assertion broke, and it broke correctly. `packages/domain-tools/test/state.test.ts` had:
+One assertion broke, and it broke correctly. `packages/domain-toolkit/test/state.test.ts` had:
 
 ```ts
 test("set is not reachable from outside the entity", () => {
@@ -194,7 +194,7 @@ unreachable by reflection — the runtime half of §4.
   moved to `Entity.create` and `AggregateRoot.fromEvents`, where they make
   creation strict rather than sitting on a path nothing called.
 - **Holes 1 and 2 (`get` as a write channel, constructor aliasing)** — **done,
-  immediately after this refactor.** A `detach` helper in `@domain-tools/state`
+  immediately after this refactor.** A `detach` helper in `@domain-toolkit/state`
   copies containers — arrays and plain objects — on construction, on read and on
   write, so nothing enters or leaves the bag by reference. Deliberately it does
   _not_ clone anything else: a shallow spread of a `Copy`, an `Identifier` or a

@@ -1,10 +1,10 @@
 export { AggregateRoot } from "./lib/aggregate-root.js";
 export { Entity } from "./lib/entity.js";
 export type { IdOf, StateOf } from "./lib/entity.js";
-// Re-exported, not re-declared. `@domain-tools/state` is private and bundled
+// Re-exported, not re-declared. `@domain-toolkit/state` is private and bundled
 // into this package's `dist` at build time, so these three names must reach
 // consumers from here or not at all.
-export type { State, RequiredKeys, RequiredState } from "@domain-tools/state";
+export type { State, RequiredKeys, RequiredState } from "@domain-toolkit/state";
 export { Identifier } from "./lib/identifier.js";
 export { ValueObject } from "./lib/value-object.js";
 export type { Repository } from "./lib/repository.js";

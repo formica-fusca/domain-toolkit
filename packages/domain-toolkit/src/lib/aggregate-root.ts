@@ -5,8 +5,8 @@ import type { IdOf, StateOf } from "./entity.js";
 import type { Identifier } from "./identifier.js";
 import type { AggregateRootClass } from "./types/aggregate-root-class.js";
 import type { Newable } from "./types/newable.js";
-import { State } from "@domain-tools/state";
-import type { RequiredState } from "@domain-tools/state";
+import { State } from "@domain-toolkit/state";
+import type { RequiredState } from "@domain-toolkit/state";
 
 // The reasoning behind this file — the cycle guard, why `hasPendingEvents` is
 // overridden at all, and the abstractness check `fromEvents` traded away — is

@@ -65,7 +65,7 @@ reachable from plain JavaScript.
 Full record: [`inheritance-to-composition.md`](../../../docs/inheritance-to-composition.md)
 and [`state-manager-init.md`](../../../docs/state-manager-init.md). The other
 half of the story — why the manager's constructor and `set` had to become public
-— is in [`@domain-tools/state`'s README](../../state/README.md#why-the-constructor-and-set-are-public).
+— is in [`@domain-toolkit/state`'s README](../../state/README.md#why-the-constructor-and-set-are-public).
 
 ## `abstractBase` — a runtime guard for a compile-time claim
 
@@ -163,7 +163,7 @@ arrives through behaviour that means something in the domain.
 It depends on a convention — `?` means _deferred_, not _nullable_ — and exists
 to prevent a specific trap: an optional property with no setter becomes silently
 unwritable. Both are spelled out in
-[`@domain-tools/state`'s README](../../state/README.md#requiredkeys-and-requiredstate).
+[`@domain-toolkit/state`'s README](../../state/README.md#requiredkeys-and-requiredstate).
 
 The cast in the body is the one `RequiredState` has always needed: a value
 carrying every required property of `S` and none of its optional ones _is_ a
@@ -187,7 +187,7 @@ nothing, because `#state` is the only reference to it in existence and it is
 Both delegate to the held manager, which detaches on read and on write. Reading
 does not hand out a live handle on state, at either overload; the aliasing
 boundary and its one deliberate limit are described in
-[`@domain-tools/state`'s README](../../state/README.md#detach--the-aliasing-guarantee).
+[`@domain-toolkit/state`'s README](../../state/README.md#detach--the-aliasing-guarantee).
 
 ## The mutation context
 

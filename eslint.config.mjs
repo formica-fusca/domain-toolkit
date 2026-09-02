@@ -15,7 +15,7 @@ export default tseslint.config(
       "**/dist/**",
       "**/.test-build/**",
       "typedoc/site/**",
-      "packages/domain-tools/tsup.config.ts",
+      "packages/domain-toolkit/tsup.config.ts",
     ],
   },
   js.configs.recommended,
@@ -35,7 +35,7 @@ export default tseslint.config(
     // "this parameter is not what I am asking about". `unknown` answers a
     // different question and stops concrete subclasses from satisfying the
     // constraint at all, so the rule has nothing to offer these files.
-    files: ["packages/domain-tools/src/lib/types/*.ts"],
+    files: ["packages/domain-toolkit/src/lib/types/*.ts"],
     rules: { "@typescript-eslint/no-explicit-any": "off" },
   },
   {

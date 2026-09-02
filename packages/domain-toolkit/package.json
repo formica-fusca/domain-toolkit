@@ -1,6 +1,6 @@
 {
-  "name": "domain-tools-ts",
-  "version": "0.1.1",
+  "name": "domain-toolkit",
+  "version": "0.1.0",
   "description": "A small, dependency-free toolkit of TypeScript building blocks for domain-driven design",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,17 +22,17 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@domain-tools/state": "0.1.0"
+    "@domain-toolkit/state": "0.1.0"
   },
   "author": "audreyigouassel@gmail.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formica-fusca/domain-tools.git",
-    "directory": "packages/domain-tools"
+    "url": "git+https://github.com/formica-fusca/domain-toolkit.git",
+    "directory": "packages/domain-toolkit"
   },
   "bugs": {
-    "url": "https://github.com/formica-fusca/domain-tools/issues"
+    "url": "https://github.com/formica-fusca/domain-toolkit/issues"
   },
-  "homepage": "https://github.com/formica-fusca/domain-tools#readme"
+  "homepage": "https://github.com/formica-fusca/domain-toolkit#readme"
 }

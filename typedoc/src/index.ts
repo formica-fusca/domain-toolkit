@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { Application, TSConfigReader, TypeDocReader } from "typedoc";
 
 /**
- * Generates the API reference for `domain-tools-ts`.
+ * Generates the API reference for `domain-toolkit`.
  *
  * This drives TypeDoc through its Node API rather than its CLI so the run can
  * be inspected: the TypeScript version actually used is printed, and conversion,

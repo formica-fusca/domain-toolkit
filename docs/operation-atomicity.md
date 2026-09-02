@@ -2,9 +2,9 @@
 
 **Status:** done — `mutate` is mandatory; 78 tests passing.
 **Date:** 2026-08-15
-**Scope:** `packages/domain-tools/src/lib/aggregate-root.ts` (`mutate`, `fromEvents`),
-`packages/domain-tools/src/lib/entity.ts` (snapshot/restore, event mark/rewind),
-`packages/state/src/index.ts` (`restore`), `packages/domain-tools/test/atomicity.test.ts`, and the models.
+**Scope:** `packages/domain-toolkit/src/lib/aggregate-root.ts` (`mutate`, `fromEvents`),
+`packages/domain-toolkit/src/lib/entity.ts` (snapshot/restore, event mark/rewind),
+`packages/state/src/index.ts` (`restore`), `packages/domain-toolkit/test/atomicity.test.ts`, and the models.
 
 ---
 
@@ -64,7 +64,7 @@ world queued for broadcast that never truthfully happened.
 ## 2. Why the operation is the unit, not the event
 
 The obvious fix is to put snapshot-assert-rollback inside `apply`. Two facts in
-this codebase rule that out, and both are verified in `packages/domain-tools/test/atomicity.test.ts`.
+this codebase rule that out, and both are verified in `packages/domain-toolkit/test/atomicity.test.ts`.
 
 **An aggregate is not valid at every instant.** `Member` is created with
 `{ name: "" }` and acquires a name only on `join`, so its seed fails its own
@@ -176,7 +176,7 @@ Both limits are pinned by tests, so they are known rather than assumed.
   that mutates a child does so through the child's method, and the child keeps
   its event.
 - **Restoration is one level deep**, the same boundary as every other copy in
-  this library (see `detach` in `@domain-tools/state`). A mutation reaching _inside_
+  this library (see `detach` in `@domain-toolkit/state`). A mutation reaching _inside_
   a nested element is not rolled back, for the same reason it is not isolated on
   read.
 

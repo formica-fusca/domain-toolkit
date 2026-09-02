@@ -1,15 +1,15 @@
-# Domain Tools
+# Domain Toolkit
 
 A small, dependency-free toolkit of TypeScript building blocks for
 domain-driven design.
 
-**[API reference](https://formica-fusca.github.io/domain-tools/)** — every
+**[API reference](https://formica-fusca.github.io/domain-toolkit/)** — every
 exported type, regenerated from source on each push to `main`.
 
 ## Installation
 
 ```sh
-yarn add domain-tools-ts
+yarn add domain-toolkit
 ```
 
 No peer dependencies, no polyfills, no import-order rules. `Entity`,

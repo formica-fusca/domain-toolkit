@@ -1,7 +1,7 @@
 {
-  "name": "@domain-tools/state",
+  "name": "@domain-toolkit/state",
   "version": "0.1.0",
-  "description": "The attribute bag behind domain-tools entities — internal, bundled into its consumer at build time",
+  "description": "The attribute bag behind domain-toolkit entities — internal, bundled into its consumer at build time",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formica-fusca/domain-tools.git",
+    "url": "git+https://github.com/formica-fusca/domain-toolkit.git",
     "directory": "packages/state"
   }
 }

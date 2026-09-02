@@ -19,8 +19,8 @@ import { StateManager } from "../src/index.js";
  * The numbering starts at 2 deliberately. Promise 1 — **creation is strict**,
  * the `RequiredKeys` / `RequiredState` contract — cannot be tested here: it is
  * enforced by `Entity.create` and `AggregateRoot.fromEvents`, which live in
- * `domain-tools`, one package *up* the dependency arrow. Its tests stayed
- * behind in `packages/domain-tools/test/state.test.ts`, which is also where the
+ * `domain-toolkit`, one package *up* the dependency arrow. Its tests stayed
+ * behind in `packages/domain-toolkit/test/state.test.ts`, which is also where the
  * two reachability assertions live for the same reason. Pulling them down here
  * would make this package dev-depend on its own consumer.
  *

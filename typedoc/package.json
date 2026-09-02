@@ -1,7 +1,7 @@
 {
-  "name": "domain-tools-typedoc",
+  "name": "domain-toolkit-typedoc",
   "version": "0.1.0",
-  "description": "Generates the API reference for domain-tools-ts from its TypeScript source",
+  "description": "Generates the API reference for domain-toolkit from its TypeScript source",
   "private": true,
   "type": "module",
   "scripts": {

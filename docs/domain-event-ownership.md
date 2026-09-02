@@ -2,13 +2,13 @@
 
 **Status:** reference — describes the design as it stands; no change proposed.
 **Date:** 2026-08-17
-**Scope:** `packages/domain-tools/src/lib/entity.ts` (the buffer, `record`,
+**Scope:** `packages/domain-toolkit/src/lib/entity.ts` (the buffer, `record`,
 `pullDomainEvents`, `markEvents`/`rewindEvents`),
-`packages/domain-tools/src/lib/aggregate-root.ts` (`childEntities`, `apply`,
+`packages/domain-toolkit/src/lib/aggregate-root.ts` (`childEntities`, `apply`,
 `replay`, `fromEvents`, the two overrides),
-`packages/domain-tools/src/lib/event-sourcing/` (`@Handle`, `HandleRegistry`),
-`packages/domain-tools/test/events.test.ts`, and the models in
-`packages/domain-tools/test/models/`.
+`packages/domain-toolkit/src/lib/event-sourcing/` (`@Handle`, `HandleRegistry`),
+`packages/domain-toolkit/test/events.test.ts`, and the models in
+`packages/domain-toolkit/test/models/`.
 
 ---
 
@@ -213,11 +213,11 @@ When modelling and unsure which side of the line you are on:
   unadopted child is a bug rather than a style choice
 - [`operation-atomicity.md`](./operation-atomicity.md) — §2 why the operation is
   the unit and not the event; §6 what rollback does not cover
-- [`../packages/domain-tools/docs/aggregate-root.md`](../packages/domain-tools/docs/aggregate-root.md)
+- [`../packages/domain-toolkit/docs/aggregate-root.md`](../packages/domain-toolkit/docs/aggregate-root.md)
   — the cycle guard, and why `hasPendingEvents` is overridden at all
-- [`../packages/domain-tools/docs/entity.md`](../packages/domain-tools/docs/entity.md)
+- [`../packages/domain-toolkit/docs/entity.md`](../packages/domain-toolkit/docs/entity.md)
   — `markEvents` as a count rather than a copy
-- [`../packages/domain-tools/docs/domain-event.md`](../packages/domain-tools/docs/domain-event.md)
+- [`../packages/domain-toolkit/docs/domain-event.md`](../packages/domain-toolkit/docs/domain-event.md)
   — why ordering uses a counter and not `occurredAt`
-- [`../packages/domain-tools/docs/handle-registry.md`](../packages/domain-tools/docs/handle-registry.md)
+- [`../packages/domain-toolkit/docs/handle-registry.md`](../packages/domain-toolkit/docs/handle-registry.md)
   — why the registry is keyed by `AggregateRootClass`
