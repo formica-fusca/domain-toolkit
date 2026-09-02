@@ -1,8 +1,8 @@
 {
-  "name": "domain-tools-ts",
+  "name": "domain-tools-workspace",
   "version": "0.1.0",
-  "description": "Workspace root for domain-tools",
-  "private": false,
+  "description": "Workspace root for domain-tools — publishes nothing itself",
+  "private": true,
   "packageManager": "yarn@1.22.22",
   "workspaces": [
     "packages/*",
