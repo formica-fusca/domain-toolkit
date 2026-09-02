@@ -1,5 +1,5 @@
 {
-  "name": "domain-tools",
+  "name": "domain-tools-ts",
   "version": "0.1.0",
   "description": "A small, dependency-free toolkit of TypeScript building blocks for domain-driven design",
   "main": "./dist/index.js",

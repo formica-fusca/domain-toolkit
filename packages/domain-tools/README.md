@@ -1,4 +1,4 @@
-# domain-tools
+# domain-tools-ts
 
 The published package: TypeScript building blocks for domain-driven design.
 

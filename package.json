@@ -1,8 +1,8 @@
 {
-  "name": "domain-tools-workspace",
+  "name": "domain-tools-ts",
   "version": "0.1.0",
-  "description": "Workspace root for domain-tools — publishes nothing itself",
-  "private": true,
+  "description": "Workspace root for domain-tools",
+  "private": false,
   "packageManager": "yarn@1.22.22",
   "workspaces": [
     "packages/*",
@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "typecheck": "tsc -b",
-    "build": "yarn typecheck && yarn workspace domain-tools build",
-    "test": "yarn typecheck && yarn workspace @domain-tools/state test && yarn workspace domain-tools test",
+    "build": "yarn typecheck && yarn workspace domain-tools-ts build",
+    "test": "yarn typecheck && yarn workspace @domain-tools/state test && yarn workspace domain-tools-ts test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "docs": "yarn workspace domain-tools-typedoc docs",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "name": "domain-tools",
+  "name": "domain-tools-ts",
   "headings": {
     "readme": false
   },

@@ -9,12 +9,20 @@ exported type, regenerated from source on each push to `main`.
 ## Installation
 
 ```sh
-yarn add domain-tools
+yarn add domain-tools-ts
 ```
 
 No peer dependencies, no polyfills, no import-order rules. `Entity`,
 `AggregateRoot`, `Identifier`, `ValueObject`, `Repository`, `DomainEvent` and
 the domain errors work as-is.
+
+### Module format
+
+The package is **ESM only**. It ships a single `dist/index.js` as an ES module,
+and its `exports` map declares only an `import` entry, so `require()` fails with
+`ERR_PACKAGE_PATH_NOT_EXPORTED` on every Node version. Load it with `import`
+from an ES module, a TypeScript project using `nodenext` or `bundler` module
+resolution, or any bundler. There is no CommonJS build.
 
 ### Using `@Handle`
 
