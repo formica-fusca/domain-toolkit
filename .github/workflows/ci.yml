@@ -65,9 +65,13 @@ jobs:
       # in no consumer's node_modules. tsup inlines it into both the JS and the
       # .d.ts — this asserts the inlining actually happened, because the failure
       # is otherwise invisible until someone installs the package.
+      #
+      # Only a quoted specifier counts (`from "..."`, `import("...")`,
+      # `require("...")`). Doc comments name the package in backticks, and
+      # those survive into the .d.ts on purpose.
       - name: the private dependency must not survive into dist
         run: |
-          if grep -rn "@domain-tools/state" packages/domain-tools/dist; then
+          if grep -rnE "['\"]@domain-tools/state['\"]" packages/domain-tools/dist; then
             echo "::error::@domain-tools/state leaked into the published bundle"
             exit 1
           fi
